@@ -1,0 +1,66 @@
+syntax = "proto3";
+option go_package = "./user";
+
+message UserInfo{
+  int64 Id=10;
+  string Username = 20;
+  string Password = 30;
+  string Email=40;
+  string Mobile=41;
+  Sex Sex=50;
+  string Salt=60;
+}
+
+message ArticleInfo{
+  int64 Id=10;
+  string Title = 20;
+  string Author = 30;
+  string Img=40;
+  int64 Num=41;
+}
+
+enum Sex{
+  Default=0;
+  Man=20;
+  WoMan=30;
+}
+
+message CreateReq {
+  UserInfo info=10;
+}
+
+message CreateRes {
+  UserInfo info=10;
+}
+
+message GetUserReq {
+  int64 id=10;
+}
+
+message GetUserRes {
+  UserInfo info=10;
+}
+
+message GetUserByUsernameReq {
+  string username=10;
+}
+
+message GetUserByUsernameRes {
+  UserInfo info=10;
+}
+message GetArticlesReq {
+  int64 offset=10;
+  int64 limit=20;
+}
+
+message GetArticlesRes {
+  repeated ArticleInfo info=10;
+  int64 Total=20;
+}
+service User {
+  rpc CreateUser(CreateReq) returns(CreateRes);
+  rpc GetUser(GetUserReq) returns(GetUserRes);
+  rpc GetUserByUsername(GetUserByUsernameReq) returns(GetUserByUsernameRes);
+  rpc GetArticles(GetArticlesReq) returns(GetArticlesRes);
+}
+

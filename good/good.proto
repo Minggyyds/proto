@@ -1,0 +1,25 @@
+syntax = "proto3";
+option go_package = "./good";
+
+message ArticleInfo{
+  int64 Id=10;
+  string Title = 20;
+  string Author = 30;
+  string Img=40;
+  int64 Num=41;
+}
+
+message GetArticlesReq {
+  int64 offset=10;
+  int64 limit=20;
+}
+
+message GetArticlesRes {
+  repeated ArticleInfo info=10;
+  int64 Total=20;
+}
+
+service Good {
+  rpc GetArticles(GetArticlesReq) returns(GetArticlesRes);
+}
+
